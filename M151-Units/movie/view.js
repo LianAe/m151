@@ -1,3 +1,18 @@
+function showReview(value, movId) {
+    let str = "";
+    for (let i = 1; i <= 5; i++) {
+        str += `<a href="/rating/${movId}/${i}">`;
+        if (value >= i) {
+            str += "&#9733";
+        } else {
+            str += "&#9734";
+        }
+        str += "</a>";
+    }
+    return str;
+}
+
+
 export function render(movies) {     
     return ` 
     <!DOCTYPE html>
@@ -26,7 +41,9 @@ export function render(movies) {
                                     `<tr>    
                                         <td>${ movie.id }</td>          
                                         <td>${ movie.title }</td>
-                                        <td>${ movie.year }</td>         
+                                        <td>${ movie.year }</td>
+                                        <td>${ showReview(movie.userRating, movie.id) }</td> 
+                                        <td>${ movie.rating }</td>         
                                         <td><a href="/movie/delete/${ movie.id  }">löschen</a></td>          
                                         <td><a href="/movie/form/${ movie.id  }">bearbeiten</a></td> 
                                     </tr>`
